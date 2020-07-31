@@ -6,6 +6,7 @@
 #include <string.h> 
 #include <typeinfo>
 #include <sstream>
+#include <bits/stdc++.h>
 using namespace std;
 
 class Graph{
@@ -39,6 +40,7 @@ class Graph{
 				    cout<<"\n\n";
 			   	}
 			}
+			
 };
 
 
@@ -87,7 +89,8 @@ int main() {
 	Graph g;
 	
 	int isGraphDirected;
-    char verticesNames[g.inputVertix];
+    char * verticesNames;
+    verticesNames = new char [g.inputVertix];
 	
 	//files lines
 	string line1, line2, line3, allEdges;
@@ -97,7 +100,7 @@ int main() {
 
 	string line;
 	
-	char * fileName;
+	char * fileName; 
 	fileName = new char[100];
 	cout << "\n\n\t\t*********************** Enter The File Name With Extension: ";
 	cin >> fileName;
@@ -213,8 +216,6 @@ int main() {
 			g.makeadjacencyMatrix(graph, destination, source);
 		}
 	}
-	
-	
 	
 	g.printAdjacencyMatrix(graph, verticesNames);
    
