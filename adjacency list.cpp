@@ -195,7 +195,8 @@ int main(){
 
 	string line;
 	
-	char fileName[100];
+	char * fileName;
+	fileName = new char[100];
 	cout << "\n\n\t\t*********************** Enter The File Name With Extension: ";
 	cin >> fileName;
 	cout << "\n\n";
@@ -236,7 +237,7 @@ int main(){
 
 //*************************** Extracting Data from File data ******************************
 
-	//creating graph extracting data from line1
+	//extracting data from line1
 	int *array;
 	array = stringToIntegerVerices(line1);
 	for ( int i = 0; i < 2; i++ ) {
@@ -277,6 +278,7 @@ int main(){
 
 	int src = 0;
 	int len = strlen(verticesNames);
+	
 	for(int i = 0, j = 1; i < edges * 2; i = i + 2, j = j + 2){	
 		
 		for(int k = 0; k < len ; k++){	

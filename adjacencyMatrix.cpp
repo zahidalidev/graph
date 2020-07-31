@@ -71,5 +71,5 @@ int main() {
    	g.makeadjacencyMatrix(graph);
 	g.printAdjacencyMatrix(graph);
    
-   
+}
 
