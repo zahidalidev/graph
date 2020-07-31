@@ -61,19 +61,80 @@ class Graph{
 		
 		//function to print the graph
 		void printGraph(Graph* graph, char verticesNames[]){
-
-			cout << "\n\tAdjacency List\n\n";
-		    for(int i = 0; i < graph -> vertex; i++){	//printing all adjacency lists of graph 
-		    	
+			cout << "\n\t\t***************************************************************************";
+			cout << "\n\t\t************************* Adjacency List of Graph *************************";
+			cout << "\n\t\t***************************************************************************\n\n";
+		    
+		    cout << "\t\t\t\t _____________________________\n\t\t\t\t|\n";
+			for(int i = 0; i < graph -> vertex; i++){	//printing all adjacency lists of graph 	
 		        Node *root = graph -> arr[i].head;
 
-		        cout << "\t"<< verticesNames[i];
+		        cout << "\t\t\t\t|\t"<< verticesNames[i];
 		        while(root != NULL){	//printing one list
 		            cout << " --> " << root -> data;
 		            root = root -> next;
 		        }
 		        cout << endl;
 		    }
+		    cout << "\t\t\t\t|_____________________________\n\t\t\t\t\n";
+		}
+		
+		void verticeNeighbour(Graph* graph, char verticesNames[], char vertice){
+			int currentVertice;
+			for(int i = 0; i < strlen(verticesNames); i++){
+				if(verticesNames[i] == vertice){
+					currentVertice = i;
+				}
+			}
+			
+			Node *root = graph -> arr[currentVertice].head;
+			
+			cout << "\t\t";
+	        while(root != NULL){	//printing one list
+	            cout << " --> " << root -> data;
+	            root = root -> next;
+	        }
+	        cout << endl;
+		
+		}
+		
+		void consoleUI(int vertices, int edges, int isGraphDirected, Graph* graph, char verticesNames[]){
+			int option;
+			while(true){
+				cout << "\n\n\t\t****************** Choose From The Following Options ***************\n\n";
+				cout <<"\n\t\tEnter 1 to know the Vertices";
+				cout <<"\n\t\tEnter 2 to know the edges";
+				cout <<"\n\t\tEnter 3 to know the Graph is directed or not";
+				cout <<"\n\t\tEnter 4 to know the neighbour of any Vertice";
+				cout <<"\n\t\tEnter any other key to Exit ";
+				cout <<"\n\t\tAnswer:  ";
+				
+				cin >> option;
+				
+				if(option == 1){
+					cout << "\n\t\t----- * This Graph has " << vertices << " vertices * ---------\n";	
+				}
+				else if(option == 2){
+					cout << "\n\t\t----- * This Graph has " << edges << " edges * ---------\n";	
+				}
+				else if(option == 3){
+					if(isGraphDirected == 0){
+						cout << "\n\t\t----- * This Graph is Undirected * ---------\n";
+					}else{
+						cout << "\n\t\t----- * This Graph is Directed * ---------\n"; 
+					}
+				}
+				else if(option == 4){
+					char vertice;
+					cout << "\t\t\t----- * Enter the vertice whose neighbours You Want to Knoe: ";
+					cin >> vertice;
+					cout << "\n\n\t\tThis vertice has following neighbours:- \n\n";
+					verticeNeighbour(graph, verticesNames, toupper(vertice));
+				}
+				else{
+					break;
+				}
+			}
 		}
 
 };
@@ -115,6 +176,7 @@ int toIntger(string a){
 	
 	return edges;
 }
+
 
 int main(){
 	
@@ -236,5 +298,8 @@ int main(){
 
     g.printGraph(graph, verticesNames);
     
+
+//***************************** consoleUI ******************************
+    g.consoleUI(vertices, edges, isGraphDirected, graph, verticesNames);
     return 0;
 }
