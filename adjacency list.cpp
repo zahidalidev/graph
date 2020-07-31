@@ -65,18 +65,18 @@ class Graph{
 			cout << "\n\t\t************************* Adjacency List of Graph *************************";
 			cout << "\n\t\t***************************************************************************\n\n";
 		    
-		    cout << "\t\t\t\t _____________________________\n\t\t\t\t|\n";
+		    cout << "\t\t\t\t\t _____________________________\n\t\t\t\t\t|\n";
 			for(int i = 0; i < graph -> vertex; i++){	//printing all adjacency lists of graph 	
 		        Node *root = graph -> arr[i].head;
 
-		        cout << "\t\t\t\t|\t"<< verticesNames[i];
+		        cout << "\t\t\t\t\t|\t"<< verticesNames[i];
 		        while(root != NULL){	//printing one list
 		            cout << " --> " << root -> data;
 		            root = root -> next;
 		        }
 		        cout << endl;
 		    }
-		    cout << "\t\t\t\t|_____________________________\n\t\t\t\t\n";
+		    cout << "\t\t\t\t\t|_____________________________\n\t\t\t\t\n";
 		}
 		
 		void verticeNeighbour(Graph* graph, char verticesNames[], char vertice){
@@ -179,6 +179,7 @@ int toIntger(string a){
 
 
 int main(){
+	system("Color E5");
 	
 	Graph *graph;
     Graph g;
@@ -194,8 +195,13 @@ int main(){
 
 	string line;
 	
+	char fileName[100];
+	cout << "\n\n\t\t*********************** Enter The File Name With Extension: ";
+	cin >> fileName;
+	cout << "\n\n";
+	
 	int count = 0, edgCount = 0;
-	ifstream mfile ("graphData.txt");
+	ifstream mfile (fileName);
 	if (mfile.is_open()){
 		while ( getline (mfile,line) )	{
     	  	
@@ -223,7 +229,8 @@ int main(){
 		mfile.close();
 	}
 	else{
-		cout << "Unable to open file";	
+		cout << "\n\t\t!!!!!!!!!!!!!!!!!!!!!!!!!! Unable to open file !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n";
+		return 0;	
 	} 
 
 
