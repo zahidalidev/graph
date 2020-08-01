@@ -10,19 +10,32 @@
 using namespace std;
 
 class Graph{
+	private:
+		vector<int> que;
 	public:
-		int inputEdges, inputVertix;
+		int inputEdges, inputVertix; 
 		
 		void makeadjacencyMatrix(int **graph, int source, int destination){
 			graph[source][destination] = 1; 
 		}			
 		
-		void depthFirstSearch(int startingNodeIndex, vector<bool>& visited, int** graph, char verticesNames[]){ 			  
-		    cout << verticesNames[startingNodeIndex] << ", ";  //print current node 
-		    visited[startingNodeIndex] = true; //visited true			  
-		    for (int i = 0; i < inputVertix; i++) { 
-		        if ((!visited[i]) && (graph[startingNodeIndex][i] == 1)) { 
-		            depthFirstSearch(i, visited, graph, verticesNames); 
+		void breathFirstSearch(int startingNodeIndex, vector<bool>& visited, int** graph, char verticesNames[], int vertice){ 			  
+		   
+		    que.push_back(startingNodeIndex); 	//pushing to que
+		    visited[startingNodeIndex] = true; 	//making node to visited
+
+		    int vertexIndex; 
+		    while (!que.empty()) { 
+		        vertexIndex = que[0];
+
+		        cout << verticesNames[vertexIndex] << ", "; 	//printing
+		        que.erase(que.begin()); 	//dequing element from the start from the que
+
+		        for (int i = 0; i < vertice; i++) { 
+		            if ((!visited[i]) && (graph[vertexIndex][i] == 1)) { 
+		                que.push_back(i);		//pushing to que
+		                visited[i] = true;
+		            } 
 		        } 
 		    } 
 		} 
@@ -59,6 +72,7 @@ int * stringToIntegerVerices(string line){
 
 int toIntger(string a){
 	int edges = 0;
+	
 	stringstream toInt(a);
 	toInt >> edges;
 	
@@ -134,6 +148,7 @@ int main() {
 	  		g.inputVertix = *(array + i);
 		}else{
 			isGraphDirected = *(array + i);
+			
 		}	  
 	}
 	
@@ -159,9 +174,9 @@ int main() {
 		}
 	}	 
 
-
 //*************************** Creating Matrix ******************************
 	
+   
    	//making matrix 
    	int** graph = new int* [g.inputVertix];
    	for(int i = 0; i < g.inputVertix; i++){
@@ -174,10 +189,8 @@ int main() {
       		graph[i][j] = 0;
 	  	} 
    	}
-
    
 //*************************** adding edges ******************************
-
 	int source = 0;
 	int destination = 0;
 	int len = strlen(verticesNames);
@@ -215,13 +228,13 @@ int main() {
 	}
 	
 	
-	//*************************** Depth First Search ******************************
-	
-	vector<bool> visited(g.inputVertix, false); 
+	//*************************** Breath First Search ******************************
+
+	vector<bool> visited(g.inputVertix, false);
 	cout << "\n\t\t\t\t The Order of Visited Nodes: ";
-	g.depthFirstSearch(startingNodeIndex, visited, graph, verticesNames); 
+	g.breathFirstSearch(startingNodeIndex, visited, graph, verticesNames, g.inputVertix); 
 	cout << "\n\n";
-	
+	   
    	return 0;
 }
 
